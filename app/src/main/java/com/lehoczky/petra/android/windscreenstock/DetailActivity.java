@@ -65,16 +65,16 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         mCurrentProductUri = intent.getData();
 
         if (null == mCurrentProductUri) {
-            setTitle(R.string.activity_add_product_label);
+            setTitle(R.string.activity_add_windscreen_label);
         } else {
-            setTitle(R.string.activity_edit_product_label);
+            setTitle(R.string.activity_edit_windscreen_label);
             getLoaderManager().initLoader(EXISTING_PINVENTORY_LOADER, null, this);
         }
 
-        mNameEditText = (EditText) findViewById(R.id.et_product_name);
-        mPriceEditText = (EditText) findViewById(R.id.et_product_price);
-        mQuantityEditText = (EditText) findViewById(R.id.et_product_quantity);
-        mSupplierContactEditText = (EditText) findViewById(R.id.et_supplier_contact);
+        mNameEditText = (EditText) findViewById(R.id.et_windscreen_name);
+        mPriceEditText = (EditText) findViewById(R.id.et_windscreen_price);
+        mQuantityEditText = (EditText) findViewById(R.id.et_windscreen_quantity);
+        mSupplierContactEditText = (EditText) findViewById(R.id.et_vendor_contact);
         mProductImageView = (ImageView) findViewById(R.id.iv_product_image);
 
         mNameEditText.setOnTouchListener(mChangeTouchListener);
@@ -82,7 +82,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         mQuantityEditText.setOnTouchListener(mChangeTouchListener);
         mSupplierContactEditText.setOnTouchListener(mChangeTouchListener);
 
-        mProductImageView.setImageResource(R.drawable.ic_add_a_photo_black);
+        mProductImageView.setImageResource(R.drawable.ic_plus);
         mProductImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,13 +163,13 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             if (isNewProduct) {
                 Uri newUri = getContentResolver().insert(WindscreenEntry.CONTENT_URI, values);
                 productSaved = (null != newUri);
-                showToastIf(productSaved, R.string.editor_insert_product_successful,
-                        R.string.editor_insert_product_failed);
+                showToastIf(productSaved, R.string.editor_insert_windscreen_successful,
+                        R.string.editor_insert_windscreen_failed);
             } else {
                 int rowsAffected = getContentResolver().update(mCurrentProductUri, values, null, null);
                 productSaved = (0 != rowsAffected);
-                showToastIf(productSaved, R.string.editor_update_product_successful,
-                        R.string.editor_update_product_failed);
+                showToastIf(productSaved, R.string.editor_update_windscreen_successful,
+                        R.string.editor_update_windscreen_failed);
             }
         } else {
             showToastMessage(R.string.editor_error_fields_blank);
@@ -181,8 +181,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void deleteProduct() {
         if (null != mCurrentProductUri) {
             int rowsDeleted = getContentResolver().delete(mCurrentProductUri, null, null);
-            showToastIf(0 == rowsDeleted, R.string.editor_delete_product_failed,
-                    R.string.editor_delete_product_success);
+            showToastIf(0 == rowsDeleted, R.string.editor_delete_windscreen_failed,
+                    R.string.editor_delete_windscreen_success);
         }
 
         finish();
