@@ -51,7 +51,7 @@ public class WindscreenProvider extends ContentProvider {
                 break;
             case PRODUCT_ID:
                 selection = WindscreenContract.WindscreenEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 cursor = database.query(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
@@ -124,7 +124,7 @@ public class WindscreenProvider extends ContentProvider {
                 return updateProduct(uri, contentValues, selection, selectionArgs);
             case PRODUCT_ID:
                 selection = WindscreenContract.WindscreenEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updateProduct(uri, contentValues, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Update is not supported for " + uri);
@@ -196,7 +196,7 @@ public class WindscreenProvider extends ContentProvider {
                 break;
             case PRODUCT_ID:
                 selection = WindscreenContract.WindscreenEntry._ID + "=?";
-                selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 rowsDeleted = database.delete(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, selection, selectionArgs);
                 break;
             default:

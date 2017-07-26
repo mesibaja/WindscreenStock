@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -24,13 +24,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!-- Price category -->
             <TextView
-                android:id="@+id/tv_price"
+                android:id="@+id/price"
                 style="@style/SecondaryText"/>
 
             <TextView
-                android:text="@string/tv_price_label_unit"
-                android:layout_toRightOf="@id/tv_price"
+                android:text="@string/price_currency"
+                android:layout_toRightOf="@id/price"
                 android:paddingLeft="@dimen/padding_item_data"
                 style="@style/SecondaryText"/>
 
@@ -41,19 +42,20 @@
                 android:paddingRight="@dimen/padding_item_data"/>
 
             <TextView
-                android:id="@+id/tv_quantity"
+                android:id="@+id/quantity"
                 style="@style/SecondaryText"
                 android:paddingLeft="@dimen/padding_item_data"
                 android:paddingRight="@dimen/padding_item_data"/>
 
             <TextView
                 style="@style/SecondaryText"
-                android:text="@string/tv_in_stock" />
+                android:text="@string/available" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <!-- Sale Button -->
     <Button
         android:id="@+id/b_sale"
         android:layout_width="@dimen/view_zero_width"

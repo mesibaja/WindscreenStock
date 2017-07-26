@@ -6,7 +6,7 @@
     tools:context="com.lehoczky.petra.android.CatalogActivity">
 
     <ListView
-        android:id="@+id/lv_products"
+        android:id="@+id/products_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
@@ -17,32 +17,32 @@
         android:layout_centerInParent="true">
 
         <ImageView
-            android:id="@+id/iv_empty_box"
+            android:id="@+id/ic_empty_box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ic_empty_box"/>
 
         <TextView
-            android:id="@+id/tv_empty_title_text"
+            android:id="@+id/empty_title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_empty_box"
+            android:layout_below="@+id/ic_empty_box"
             android:layout_centerHorizontal="true"
             android:paddingTop="@dimen/padding_empty_textview"
-            android:text="@string/tv_empty_view_title_text"
+            android:text="@string/empty_view_title_text"
             android:textColor="@color/colorPrimaryText"
             android:textStyle="bold"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <TextView
-            android:id="@+id/tv_empty_subtitle_text"
+            android:id="@+id/empty_subtitle_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_empty_title_text"
+            android:layout_below="@+id/empty_title_text"
             android:layout_centerHorizontal="true"
             android:textStyle="bold"
-            android:text="@string/tv_empty_view_subtitle_text"
+            android:text="@string/empty_view_subtitle_text"
             android:textAppearance="?android:textAppearanceSmall"
             android:textColor="@color/colorSecondaryText"/>
 

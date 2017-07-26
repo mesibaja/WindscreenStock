@@ -65,17 +65,17 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         mCurrentProductUri = intent.getData();
 
         if (null == mCurrentProductUri) {
-            setTitle(R.string.activity_add_windscreen_label);
+            setTitle(R.string.add_windscreen);
         } else {
-            setTitle(R.string.activity_edit_windscreen_label);
+            setTitle(R.string.add_windscreen);
             getLoaderManager().initLoader(EXISTING_PINVENTORY_LOADER, null, this);
         }
 
-        mNameEditText = (EditText) findViewById(R.id.et_windscreen_name);
-        mPriceEditText = (EditText) findViewById(R.id.et_windscreen_price);
-        mQuantityEditText = (EditText) findViewById(R.id.et_windscreen_quantity);
+        mNameEditText = (EditText) findViewById(R.id.windscreen_name);
+        mPriceEditText = (EditText) findViewById(R.id.windscreen_price);
+        mQuantityEditText = (EditText) findViewById(R.id.windscreen_quantity);
         mSupplierContactEditText = (EditText) findViewById(R.id.et_vendor_contact);
-        mProductImageView = (ImageView) findViewById(R.id.iv_product_image);
+        mProductImageView = (ImageView) findViewById(R.id.product_image);
 
         mNameEditText.setOnTouchListener(mChangeTouchListener);
         mPriceEditText.setOnTouchListener(mChangeTouchListener);
@@ -163,16 +163,16 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             if (isNewProduct) {
                 Uri newUri = getContentResolver().insert(WindscreenContract.WindscreenEntry.CONTENT_URI, values);
                 productSaved = (null != newUri);
-                showToastIf(productSaved, R.string.editor_insert_windscreen_successful,
-                        R.string.editor_insert_windscreen_failed);
+                showToastIf(productSaved, R.string.insert_windscreen_successful,
+                        R.string.insert_windscreen_failed);
             } else {
                 int rowsAffected = getContentResolver().update(mCurrentProductUri, values, null, null);
                 productSaved = (0 != rowsAffected);
-                showToastIf(productSaved, R.string.editor_update_windscreen_successful,
-                        R.string.editor_update_windscreen_failed);
+                showToastIf(productSaved, R.string.update_windscreen_successful,
+                        R.string.update_windscreen_failed);
             }
         } else {
-            showToastMessage(R.string.editor_error_fields_blank);
+            showToastMessage(R.string.error_fields_blank);
         }
 
         return productSaved;
@@ -181,8 +181,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void deleteProduct() {
         if (null != mCurrentProductUri) {
             int rowsDeleted = getContentResolver().delete(mCurrentProductUri, null, null);
-            showToastIf(0 == rowsDeleted, R.string.editor_delete_windscreen_failed,
-                    R.string.editor_delete_windscreen_success);
+            showToastIf(0 == rowsDeleted, R.string.delete_windscreen_failed,
+                    R.string.delete_windscreen_success);
         }
 
         finish();
@@ -321,9 +321,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
     private void showUnsavedChangesDialog(DialogInterface.OnClickListener discardButtonClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.message_unsaved_changes_dialog);
-        builder.setPositiveButton(R.string.option_discard, discardButtonClickListener);
-        builder.setNegativeButton(R.string.option_keep_editing, new DialogInterface.OnClickListener() {
+        builder.setMessage(R.string.unsaved_changes_dialog);
+        builder.setPositiveButton(R.string.discard, discardButtonClickListener);
+        builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 if (null != dialog) {
                     dialog.dismiss();
@@ -338,12 +338,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     private void showDeleteConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.message_delete_dialog);
-        builder.setPositiveButton(R.string.option_delete, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 deleteProduct();
             }
         });
-        builder.setNegativeButton(R.string.option_cancel, new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 if (null != dialog) {
                     dialog.dismiss();
@@ -384,14 +384,14 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
 
         Intent sendEmailIntent = new Intent(Intent.ACTION_SENDTO,
                 Uri.fromParts("mailto",supplierContactString, null));
-        sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.email_order_subject);
-        sendEmailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_order_message, nameString));
+        sendEmailIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.order_subject);
+        sendEmailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.order_message, nameString));
 
         if (null != sendEmailIntent.resolveActivity(getPackageManager())) {
             startActivity(sendEmailIntent);
         } else {
             Log.w(LOG_TAG, "Install a browser to read the article.");
-            showToastMessage(R.string.error_no_browser);
+            showToastMessage(R.string.no_browser);
         }
     }
 }

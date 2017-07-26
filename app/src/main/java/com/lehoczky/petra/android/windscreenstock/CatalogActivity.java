@@ -34,7 +34,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        ListView productListView = (ListView) findViewById(R.id.lv_products);
+        ListView productListView = (ListView) findViewById(R.id.products_list);
 
         View emptyView = findViewById(R.id.empty_view);
         productListView.setEmptyView(emptyView);

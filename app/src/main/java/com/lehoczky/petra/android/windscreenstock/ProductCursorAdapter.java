@@ -32,17 +32,17 @@ public class ProductCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
-        TextView nameTextView = (TextView) view.findViewById(R.id.tv_name);
+        TextView nameTextView = (TextView) view.findViewById(R.id.name);
         int nameColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME);
         String productName = cursor.getString(nameColumnIndex);
         nameTextView.setText(productName);
 
-        TextView priceTextView = (TextView) view.findViewById(R.id.tv_price);
+        TextView priceTextView = (TextView) view.findViewById(R.id.price);
         int priceColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE);
         int productPrice = cursor.getInt(priceColumnIndex);
         priceTextView.setText(String.valueOf(productPrice));
 
-        final TextView quantityTextView = (TextView) view.findViewById(R.id.tv_quantity);
+        final TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
         int quantityColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
         int productQuantity = cursor.getInt(quantityColumnIndex);
         quantityTextView.setText(String.valueOf(productQuantity));
@@ -75,11 +75,11 @@ public class ProductCursorAdapter extends CursorAdapter {
                 int quantity = Integer.parseInt(quantityTextView.getText().toString());
 
                 if (0 == quantity) {
-                    Toast.makeText(mContext, R.string.message_no_more_in_stock,
+                    Toast.makeText(mContext, R.string.unavailable,
                             Toast.LENGTH_SHORT).show();
                 } else if (quantity > 0) {
                     ContentValues values = new ContentValues();
-                    values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY, quantity-1);
+                    values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY, quantity - 1);
 
                     Uri currentProductUri =
                             ContentUris.withAppendedId(WindscreenContract.WindscreenEntry.CONTENT_URI, productId);
@@ -88,9 +88,9 @@ public class ProductCursorAdapter extends CursorAdapter {
                             mContext.getContentResolver().update(currentProductUri, values, null, null);
 
                     if (0 != rowsAffected) {
-                        quantityTextView.setText(Integer.toString(quantity-1));
+                        quantityTextView.setText(Integer.toString(quantity - 1));
                     } else {
-                        Toast.makeText(mContext, R.string.message_error_with_update, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, R.string.error_message, Toast.LENGTH_SHORT).show();
                     }
                 }
             }

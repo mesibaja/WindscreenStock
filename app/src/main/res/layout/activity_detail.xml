@@ -18,30 +18,30 @@
             android:layout_width="@dimen/view_zero_width"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/tv_category_name"
+            android:text="@string/category_name"
             style="@style/CategoryLabel"/>
 
         <!-- Name field -->
         <EditText
-            android:id="@+id/et_windscreen_name"
+            android:id="@+id/windscreen_name"
             android:layout_height="wrap_content"
             android:layout_width="@dimen/view_zero_width"
             android:layout_weight="2"
-            android:hint="@string/et_hint_windscreen_name"
+            android:hint="@string/hint_windscreen_name"
             android:inputType="textCapWords" />
 
     </LinearLayout>
 
     <!-- Price category -->
     <LinearLayout
-        android:id="@+id/container_price"
+        android:id="@+id/price_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <!-- Label -->
         <TextView
-            android:text="@string/tv_category_price"
+            android:text="@string/category_price"
             android:layout_height="wrap_content"
             android:layout_width="@dimen/view_zero_width"
             android:layout_weight="1"
@@ -56,15 +56,15 @@
 
             <!-- Price field -->
             <EditText
-                android:id="@+id/et_windscreen_price"
+                android:id="@+id/windscreen_price"
                 android:inputType="numberDecimal"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent" />
 
             <!-- Units for price (EURO) -->
             <TextView
-                android:id="@+id/tv_price_label"
-                android:text="@string/tv_price_label_unit"
+                android:id="@+id/price"
+                android:text="@string/price_currency"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_alignParentRight="true"
@@ -87,7 +87,7 @@
             android:layout_width="@dimen/view_zero_width"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/tv_category_quantity"
+            android:text="@string/quantity"
             style="@style/CategoryLabel"/>
 
         <LinearLayout
@@ -96,9 +96,9 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <!-- Name field -->
+            <!-- Quantity field -->
             <EditText
-                android:id="@+id/et_windscreen_quantity"
+                android:id="@+id/windscreen_quantity"
                 android:layout_height="wrap_content"
                 android:layout_width="@dimen/view_zero_width"
                 android:layout_weight="3"
@@ -106,14 +106,14 @@
 
             <!-- Quantity decrement -->
             <Button
-                android:id="@+id/b_decrement_quantity"
+                android:id="@+id/decrement_quantity"
                 style="@style/QuantityButton"
                 android:text="@string/button_decrease_quantity"
                 android:onClick="decreaseQuantity"/>
 
             <!-- Quantity increment -->
             <Button
-                android:id="@+id/b_increment_quantity"
+                android:id="@+id/increment_quantity"
                 style="@style/QuantityButton"
                 android:text="@string/button_increase_quantity"
                 android:onClick="increaseQuantity"/>
@@ -122,7 +122,7 @@
 
     </LinearLayout>
 
-    <!-- Supplier contact category -->
+    <!-- Vendor contact category -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             android:layout_width="@dimen/view_zero_width"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/tv_category_vendor_contact"
+            android:text="@string/vendor_contact"
             style="@style/CategoryLabel"/>
 
         <LinearLayout
@@ -148,12 +148,12 @@
                 android:layout_height="wrap_content"
                 android:layout_width="@dimen/view_zero_width"
                 android:layout_weight="4"
-                android:hint="@string/et_hint_vendor_contact"
+                android:hint="@string/hint_vendor_contact"
                 android:inputType="textEmailAddress" />
 
             <!-- Order Button -->
             <ImageButton
-                android:id="@+id/ib_order"
+                android:id="@+id/order"
                 android:layout_width="@dimen/view_zero_width"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -166,7 +166,7 @@
 
     <!-- Image category -->
     <ImageView
-        android:id="@+id/iv_product_image"
+        android:id="@+id/product_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
