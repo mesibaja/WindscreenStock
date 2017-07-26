@@ -1,0 +1,55 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Windscreen Stock</string>
+    <string name="activity_add_windscreen_label">Add windscreen</string>
+    <string name="activity_edit_windscreen_label">Edit windscreen</string>
+
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+
+    <string name="editor_error_fields_blank">All fields and one image are required</string>
+
+    <string name="editor_insert_windscreen_successful">Windscreen saved</string>
+    <string name="editor_insert_windscreen_failed">The windscreen cannot be saved.</string>
+
+    <string name="editor_update_windscreen_successful">Windscreen updated</string>
+    <string name="editor_update_windscreen_failed">Cannot refresh the windscreen</string>
+
+    <string name="editor_delete_windscreen_failed">The windscreen cannot be deleted.</string>
+    <string name="editor_delete_windscreen_success">Windscreen deleted</string>
+
+    <string name="button_sale">Sale</string>
+    <string name="button_increase_quantity">+</string>
+    <string name="button_decrease_quantity">-</string>
+
+    <string name="message_no_more_in_stock">The stock is empty. Click on the windscreen to order more</string>
+    <string name="message_error_with_update">The windscreen cannot be updated.</string>
+
+    <string name="tv_category_name">Name</string>
+    <string name="et_hint_windscreen_name">name</string>
+
+    <string name="tv_category_price">Price</string>
+    <string name="tv_price_label_unit">Euro</string>
+
+    <string name="tv_category_quantity">Quantity</string>
+
+    <string name="tv_category_vendor_contact">Vendor</string>
+    <string name="et_hint_vendor_contact">E-mail</string>
+
+    <string name="tv_empty_view_title_text">The inventory is empty.</string>
+    <string name="tv_empty_view_subtitle_text">Start by adding a windscreen</string>
+
+    <string name="message_unsaved_changes_dialog">Do you wish to discard your changes?</string>
+    <string name="option_discard">Discard</string>
+    <string name="option_keep_editing">Keep editing</string>
+    <string name="message_delete_dialog">Do you wish to delete this windscreen?</string>
+    <string name="option_delete">Delete</string>
+    <string name="option_cancel">Cancel</string>
+    <string name="error_no_browser">Configurate an email client to order</string>
+
+    <string name="tv_in_stock">In stock</string>
+
+    <string name="email_order_subject">Order from Windscreen Company</string>
+    <string name="email_order_message">Hi,\n I would like to order this windscreen:
+        <xliff:g example="Phone" id="name">%s</xliff:g>.
+        Quantity: 10.\nCheers,\nMr. Smith</string>
+</resources>
