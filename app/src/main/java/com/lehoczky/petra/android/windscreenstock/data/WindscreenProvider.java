@@ -46,13 +46,13 @@ public class WindscreenProvider extends ContentProvider {
         int match = sUriMatcher.match(uri);
         switch (match) {
             case PRODUCTS:
-                cursor = database.query(WindscreenEntry.PRODUCTS_TABLE_NAME,
+                cursor = database.query(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME,
                         projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case PRODUCT_ID:
-                selection = WindscreenEntry._ID + "=?";
+                selection = WindscreenContract.WindscreenEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                cursor = database.query(WindscreenEntry.PRODUCTS_TABLE_NAME, projection, selection, selectionArgs,
+                cursor = database.query(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, projection, selection, selectionArgs,
                         null, null, sortOrder);
                 break;
             default:
@@ -76,34 +76,34 @@ public class WindscreenProvider extends ContentProvider {
     }
 
     private Uri insertProduct(Uri uri, ContentValues values) {
-        String productName = values.getAsString(WindscreenEntry.COLUMN_PRODUCT_NAME);
+        String productName = values.getAsString(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME);
         if (productName == null) {
             throw new IllegalArgumentException("Windscreen requires a name");
         }
 
-        Integer price = values.getAsInteger(WindscreenEntry.COLUMN_PRODUCT_PRICE);
+        Integer price = values.getAsInteger(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE);
         if (price != null && price < 0) {
             throw new IllegalArgumentException("Windscreen requires valid price");
         }
 
-        Integer quantity = values.getAsInteger(WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
+        Integer quantity = values.getAsInteger(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
         if (quantity != null && quantity < 0) {
             throw new IllegalArgumentException("Windscreen requires valid quantity");
         }
 
-        String emailOfSupplier = values.getAsString(WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL);
+        String emailOfSupplier = values.getAsString(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL);
         if (emailOfSupplier == null) {
             throw new IllegalArgumentException("Item requires an email");
         }
 
-        byte[] productImage = values.getAsByteArray(WindscreenEntry.COLUMN_PRODUCT_IMAGE);
+        byte[] productImage = values.getAsByteArray(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE);
         if (productImage == null) {
             throw new IllegalArgumentException("Windscreen requires an image");
         }
 
         SQLiteDatabase database = mDatabaseHelper.getWritableDatabase();
 
-        long id = database.insert(WindscreenEntry.PRODUCTS_TABLE_NAME, null, values);
+        long id = database.insert(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, null, values);
 
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
@@ -123,7 +123,7 @@ public class WindscreenProvider extends ContentProvider {
             case PRODUCTS:
                 return updateProduct(uri, contentValues, selection, selectionArgs);
             case PRODUCT_ID:
-                selection = WindscreenEntry._ID + "=?";
+                selection = WindscreenContract.WindscreenEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
                 return updateProduct(uri, contentValues, selection, selectionArgs);
             default:
@@ -132,36 +132,36 @@ public class WindscreenProvider extends ContentProvider {
     }
 
     private int updateProduct(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-        if (values.containsKey(WindscreenEntry.COLUMN_PRODUCT_NAME)) {
-            String productName = values.getAsString(WindscreenEntry.COLUMN_PRODUCT_NAME);
+        if (values.containsKey(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME)) {
+            String productName = values.getAsString(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME);
             if (productName == null) {
                 throw new IllegalArgumentException("Product requires a name");
             }
         }
 
-        if (values.containsKey(WindscreenEntry.COLUMN_PRODUCT_PRICE)) {
-            Integer price = values.getAsInteger(WindscreenEntry.COLUMN_PRODUCT_PRICE);
+        if (values.containsKey(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE)) {
+            Integer price = values.getAsInteger(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE);
             if (price != null && price < 0) {
                 throw new IllegalArgumentException("Windscreen requires valid price");
             }
         }
 
-        if (values.containsKey(WindscreenEntry.COLUMN_PRODUCT_QUANTITY)) {
-            Integer quantity = values.getAsInteger(WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
+        if (values.containsKey(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY)) {
+            Integer quantity = values.getAsInteger(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
             if (quantity != null && quantity < 0) {
                 throw new IllegalArgumentException("Windscreen requires valid quantity");
             }
         }
 
-        if (values.containsKey(WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL)) {
-            String emailOfSupplier = values.getAsString(WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL);
+        if (values.containsKey(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL)) {
+            String emailOfSupplier = values.getAsString(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL);
             if (emailOfSupplier == null) {
                 throw new IllegalArgumentException("Item requires an email");
             }
         }
 
-        if (values.containsKey(WindscreenEntry.COLUMN_PRODUCT_IMAGE)) {
-            byte[] productImage = values.getAsByteArray(WindscreenEntry.COLUMN_PRODUCT_IMAGE);
+        if (values.containsKey(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE)) {
+            byte[] productImage = values.getAsByteArray(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE);
             if (productImage == null) {
                 throw new IllegalArgumentException("Windscreen requires an image");
             }
@@ -173,7 +173,7 @@ public class WindscreenProvider extends ContentProvider {
 
         SQLiteDatabase database = mDatabaseHelper.getWritableDatabase();
 
-        int rowsUpdated = database.update(WindscreenEntry.PRODUCTS_TABLE_NAME, values, selection, selectionArgs);
+        int rowsUpdated = database.update(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, values, selection, selectionArgs);
 
         if (rowsUpdated != 0) {
             getContext().getContentResolver().notifyChange(uri, null);
@@ -192,12 +192,12 @@ public class WindscreenProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case PRODUCTS:
-                rowsDeleted = database.delete(WindscreenEntry.PRODUCTS_TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, selection, selectionArgs);
                 break;
             case PRODUCT_ID:
-                selection = WindscreenEntry._ID + "=?";
+                selection = WindscreenContract.WindscreenEntry._ID + "=?";
                 selectionArgs = new String[] { String.valueOf(ContentUris.parseId(uri)) };
-                rowsDeleted = database.delete(WindscreenEntry.PRODUCTS_TABLE_NAME, selection, selectionArgs);
+                rowsDeleted = database.delete(WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
@@ -215,9 +215,9 @@ public class WindscreenProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
         switch (match) {
             case PRODUCTS:
-                return WindscreenEntry.CONTENT_LIST_TYPE;
+                return WindscreenContract.WindscreenEntry.CONTENT_LIST_TYPE;
             case PRODUCT_ID:
-                return WindscreenEntry.CONTENT_ITEM_TYPE;
+                return WindscreenContract.WindscreenEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }

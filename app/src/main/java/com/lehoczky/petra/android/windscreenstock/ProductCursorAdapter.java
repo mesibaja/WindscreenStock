@@ -82,7 +82,7 @@ public class ProductCursorAdapter extends CursorAdapter {
                     values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY, quantity-1);
 
                     Uri currentProductUri =
-                            ContentUris.withAppendedId(WindscreenEntry.CONTENT_URI, productId);
+                            ContentUris.withAppendedId(WindscreenContract.WindscreenEntry.CONTENT_URI, productId);
 
                     int rowsAffected =
                             mContext.getContentResolver().update(currentProductUri, values, null, null);

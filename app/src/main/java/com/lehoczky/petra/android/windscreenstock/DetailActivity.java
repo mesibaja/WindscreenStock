@@ -161,7 +161,7 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
             ContentValues values = getProductContentValues();
             boolean isNewProduct = (null == mCurrentProductUri);
             if (isNewProduct) {
-                Uri newUri = getContentResolver().insert(WindscreenEntry.CONTENT_URI, values);
+                Uri newUri = getContentResolver().insert(WindscreenContract.WindscreenEntry.CONTENT_URI, values);
                 productSaved = (null != newUri);
                 showToastIf(productSaved, R.string.editor_insert_windscreen_successful,
                         R.string.editor_insert_windscreen_failed);
@@ -213,20 +213,20 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         ContentValues values = new ContentValues();
 
         String nameString = mNameEditText.getText().toString().trim();
-        values.put(WindscreenEntry.COLUMN_PRODUCT_NAME, nameString);
+        values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME, nameString);
 
         String priceString = mPriceEditText.getText().toString().trim();
-        values.put(WindscreenEntry.COLUMN_PRODUCT_PRICE, priceString);
+        values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE, priceString);
 
         String quantityString = mQuantityEditText.getText().toString().trim();
-        values.put(WindscreenEntry.COLUMN_PRODUCT_QUANTITY, quantityString);
+        values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY, quantityString);
 
         String supplierContactString = mSupplierContactEditText.getText().toString().trim();
-        values.put(WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL, supplierContactString);
+        values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL, supplierContactString);
 
         BitmapDrawable drawable = (BitmapDrawable) mProductImageView.getDrawable();
         byte[] imageBytes = getBytes(drawable.getBitmap());
-        values.put(WindscreenEntry.COLUMN_PRODUCT_IMAGE, imageBytes);
+        values.put(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE, imageBytes);
 
         return values;
     }
@@ -245,12 +245,12 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
         String[] projection = {
-                WindscreenEntry._ID,
-                WindscreenEntry.COLUMN_PRODUCT_NAME,
-                WindscreenEntry.COLUMN_PRODUCT_PRICE,
-                WindscreenEntry.COLUMN_PRODUCT_QUANTITY,
-                WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL,
-                WindscreenEntry.COLUMN_PRODUCT_IMAGE };
+                WindscreenContract.WindscreenEntry._ID,
+                WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME,
+                WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE,
+                WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY,
+                WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL,
+                WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE };
 
 
         return new CursorLoader(this,
@@ -269,23 +269,23 @@ public class DetailActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         if (cursor.moveToFirst()) {
-            int nameColumnIndex = cursor.getColumnIndex(WindscreenEntry.COLUMN_PRODUCT_NAME);
+            int nameColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME);
             String name = cursor.getString(nameColumnIndex);
             mNameEditText.setText(name);
 
-            int priceColumnIndex = cursor.getColumnIndex(WindscreenEntry.COLUMN_PRODUCT_PRICE);
+            int priceColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE);
             double price = cursor.getDouble(priceColumnIndex);
             mPriceEditText.setText(Double.toString(price));
 
-            int quantityColumnIndex = cursor.getColumnIndex(WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
+            int quantityColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY);
             int quantity = cursor.getInt(quantityColumnIndex);
             mQuantityEditText.setText(Integer.toString(quantity));
 
-            int supplierContactColumnIndex = cursor.getColumnIndex(WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL);
+            int supplierContactColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL);
             String supplierContact = cursor.getString(supplierContactColumnIndex);
             mSupplierContactEditText.setText(supplierContact);
 
-            int imageColumnIndex = cursor.getColumnIndex(WindscreenEntry.COLUMN_PRODUCT_IMAGE);
+            int imageColumnIndex = cursor.getColumnIndex(WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE);
             byte[] imageBytes = cursor.getBlob(imageColumnIndex);
             Bitmap imageBitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
             mProductImageView.setImageBitmap(imageBitmap);

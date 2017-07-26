@@ -13,13 +13,13 @@ public class WindscreenDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_PRODUCTS_TABLE = "CREATE TABLE " + WindscreenEntry.PRODUCTS_TABLE_NAME + "("
-                + WindscreenEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + WindscreenEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
-                + WindscreenEntry.COLUMN_PRODUCT_PRICE + " INTEGER NOT NULL DEFAULT 0, "
-                + WindscreenEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
-                + WindscreenEntry.COLUMN_PRODUCT_SUPPLIER_EMAIL + " TEXT NOT NULL, "
-                + WindscreenEntry.COLUMN_PRODUCT_IMAGE + " BLOB NOT NULL);";
+        String SQL_CREATE_PRODUCTS_TABLE = "CREATE TABLE " + WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME + "("
+                + WindscreenContract.WindscreenEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_NAME + " TEXT NOT NULL, "
+                + WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_PRICE + " INTEGER NOT NULL DEFAULT 0, "
+                + WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_QUANTITY + " INTEGER NOT NULL DEFAULT 0, "
+                + WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_VENDOR_EMAIL + " TEXT NOT NULL, "
+                + WindscreenContract.WindscreenEntry.COLUMN_PRODUCT_IMAGE + " BLOB NOT NULL);";
 
         db.execSQL(SQL_CREATE_PRODUCTS_TABLE);
     }
@@ -27,7 +27,7 @@ public class WindscreenDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // It is safe now as we only have one database version
-        db.execSQL(" DROP TABLE IF EXISTS " + WindscreenEntry.PRODUCTS_TABLE_NAME);
+        db.execSQL(" DROP TABLE IF EXISTS " + WindscreenContract.WindscreenEntry.PRODUCTS_TABLE_NAME);
         onCreate(db);
     }
 }
